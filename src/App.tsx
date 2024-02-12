@@ -1,17 +1,10 @@
 import { useEffect, useState } from "react";
-import Button from "./components/Button";
-import { IoDocument } from "react-icons/io5";
 import TableRow from "./components/TableRow/TableRow";
-
-const sampleJson = {
-  Sno: "",
-  Date: "",
-  Day: "",
-  ValidationCount: "",
-  TotalScreens: "",
-};
+import { TailSpin } from "react-loader-spinner";
 
 function App() {
+  document.title = "Validation Status";
+
   const [activeBtn, setActiveBtn] = useState("validators");
   const [formData, setFormData] = useState({ status: "initial", data: [] });
   const [formattedData, setFormettedData] = useState({});
@@ -85,6 +78,11 @@ function App() {
             Users
           </button>
         </div>
+        <div className="p-3 flex justify-center ">
+          <button className="bg-slate-400 p-2 rounded-md font-bold">
+            Add {activeBtn}
+          </button>
+        </div>
         <div className="w-[100%] p-1 py-3">
           <table className="table w-[100%] rounded-md overflow-hidden border-separate border-spacing-y-3 p-2">
             <thead className="table-header ">
@@ -112,13 +110,19 @@ function App() {
                 </th>
               </tr>
             </thead>
-            <tbody className="border-spacing-12">
-              {/* {console.log("gh", Object.keys(formattedData))} */}
-              {Object.entries(formattedData).map((each, ind) => (
-                <TableRow key={ind} each={each} ind={ind} />
-              ))}
-            </tbody>
+            {status === "success" && (
+              <tbody className="border-spacing-12">
+                {Object.entries(formattedData).map((each, ind) => (
+                  <TableRow key={ind} each={each} ind={ind} />
+                ))}
+              </tbody>
+            )}
           </table>
+          {status === "initial" && (
+            <div className="w-full flex justify-center">
+              <TailSpin height={30} />
+            </div>
+          )}
         </div>
       </div>
     </>

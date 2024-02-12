@@ -26,12 +26,7 @@ function TableRow({ each, ind }) {
       </td>
       <td className=" text-start">
         <div className="flex justify-center">
-          <button
-            type="button"
-            className="bg-[#999] px-3 py-1 rounded text-xs font-bold hover:bg-slate-500"
-          >
-            <ViewPopUp each={each} />
-          </button>
+          <ViewPopUp each={each} />
         </div>
       </td>
     </tr>
